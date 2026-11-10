@@ -45,7 +45,7 @@ def get_theme():
 @app.route("/update_theme", methods=["POST"])
 def update_theme():
     """Persist a theme selection sent by the client."""
-    data = request.get_json()
+    data = request.get_json(silent=True) or {}
     theme = data.get("theme", DEFAULT_THEME)
 
     if theme not in VALID_THEMES:
