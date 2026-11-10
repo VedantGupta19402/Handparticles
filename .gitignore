@@ -1,0 +1,30 @@
+# Python
+__pycache__/
+*.py[cod]
+*.egg-info/
+.venv/
+venv/
+env/
+
+# IDE
+.vscode/
+.idea/
+*.swp
+.DS_Store
+Thumbs.db
+
+# Flask
+instance/
+*.db
+
+# Media and recordings
+*.mp4
+*.webm
+*.mov
+*.mkv
+/recordings/
+
+# Scratch
+*.log
+*.tmp
+*.bak
