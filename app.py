@@ -68,3 +68,13 @@ def kill_session():
         "status": "success",
         "message": "Client session terminated. Server remains running.",
     })
+def _local_ip():
+    """Best-effort lookup of the LAN address, for the startup banner."""
+    try:
+        s = socket.socket(socket.AF_INET, socket.SOCK_DGRAM)
+        s.connect(("8.8.8.8", 80))
+        ip = s.getsockname()[0]
+        s.close()
+        return ip
+    except OSError:
+        return "127.0.0.1"
