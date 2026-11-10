@@ -29,3 +29,15 @@ THEMES.Ultraviolet = { colors: ['#7b2fff', '#b26bff', '#e0c3ff'], core: '#f3e6ff
 
 export const DEFAULT_THEME = 'Aurora';
 export const THEME_KEYS = Object.keys(THEMES);
+// Gesture thresholds, normalised to frame width
+export const PINCH_THRESHOLD = 0.06; // thumb-index distance for a pinch
+export const FIST_THRESHOLD  = 0.12; // max palm-to-fingertip distance for a fist
+export const PEACE_MIN_GAP   = 0.04; // index-middle separation for a peace sign
+
+// Recording limits
+export const RECORD_SECONDS   = 60;
+export const RECORD_COUNTDOWN = 5;
+
+// Landmark indices for fingertips and palm reference
+export const FINGER_TIPS = [4, 8, 12, 16, 20];
+export const PALM_INDEX  = 9;
