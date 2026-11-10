@@ -191,3 +191,61 @@ function processHandGestures(hands) {
 
     return makingHeart;
 }
+function detectLoop() {
+    if (!handLandmarker || video.readyState < 2 || isPaused) {
+        animFrameId = requestAnimationFrame(detectLoop);
+        return;
+    }
+
+    try {
+        frameCount++;
+        const now = performance.now();
+        updateFps(now);
+
+        const results = handLandmarker.detectForVideo(video, now);
+
+        // Draw the mirrored video feed, then dim it so the neon pops
+        ctx.save();
+        ctx.translate(canvas.width, 0);
+        ctx.scale(-1, 1);
+        ctx.drawImage(video, 0, 0, canvas.width, canvas.height);
+        ctx.restore();
+        ctx.fillStyle = 'rgba(0,0,0,0.4)';
+        ctx.fillRect(0, 0, canvas.width, canvas.height);
+
+        const hands = (results.landmarks || []).map(hand => hand.map(lm => ({ ...lm, x: 1 - lm.x })));
+        document.getElementById('handCount').textContent = hands.length;
+
+        const fbData = processFireball(hands);
+
+        if (hands.length > 0) {
+            const makingHeart = processHandGestures(hands);
+            if (hands.length === 2) drawConstellation(ctx, hands[0], hands[1], currentTheme);
+
+            const spread = calcSpread(hands[0]);
+            updateGestureUI(hands, makingHeart ? '💕 FINGER HEART' : fbData.actionText);
+            document.getElementById('spread').textContent = Math.round(spread) + '%';
+            audio.updateSound(spread, hands.length);
+            prevHands = hands;
+        } else {
+            updateGestureUI(hands, null);
+            document.getElementById('spread').textContent = '0%';
+            audio.updateSound(0, 0);
+            prevHands = null;
+            if (frameCount >= nextHeartSpawn) nextHeartSpawn = frameCount;
+        }
+
+        // Lingering particles, hearts and fireballs always animate
+        updateAndDrawEffects(ctx, canvas);
+
+        // The charging orb persists even if the hands drop out
+        if (fbData.chargeRadius > 0 && fbData.chargePos) {
+            drawChargeOrb(ctx, fbData.chargePos.x, fbData.chargePos.y, fbData.chargeRadius);
+        }
+
+        animFrameId = requestAnimationFrame(detectLoop);
+    } catch (err) {
+        console.error('Error in detectLoop:', err);
+        animFrameId = requestAnimationFrame(detectLoop);
+    }
+}
