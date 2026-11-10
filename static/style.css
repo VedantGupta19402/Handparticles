@@ -259,3 +259,85 @@ html, body {
     color: #ff4444;
     box-shadow: 0 0 15px rgba(255, 0, 0, 0.4);
 }
+/* ── RECORDING UI ─────────────────────────────────────────────── */
+.status-pill {
+    position: absolute;
+    top: 24px;
+    left: 50%;
+    transform: translateX(-50%);
+    background: rgba(255, 0, 0, 0.15);
+    backdrop-filter: blur(14px);
+    -webkit-backdrop-filter: blur(14px);
+    border: 1px solid rgba(255, 0, 0, 0.4);
+    border-radius: 30px;
+    padding: 8px 16px;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    z-index: 100;
+    box-shadow: 0 0 20px rgba(255, 0, 0, 0.2);
+}
+
+.status-dot {
+    width: 10px;
+    height: 10px;
+    background: #ff0000;
+    border-radius: 50%;
+    box-shadow: 0 0 10px #ff0000;
+    animation: blink 1s infinite alternate;
+}
+
+@keyframes blink {
+    from { opacity: 1; }
+    to   { opacity: 0.3; }
+}
+
+#recordingStatusText {
+    color: #fff;
+    font-size: 14px;
+    font-weight: 600;
+    text-shadow: 0 0 5px rgba(255, 0, 0, 0.5);
+}
+
+.record-btn {
+    background: rgba(255, 255, 255, 0.1);
+    backdrop-filter: blur(14px);
+    -webkit-backdrop-filter: blur(14px);
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    border-radius: 30px;
+    padding: 10px 18px;
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    color: #fff;
+    font-family: inherit;
+    font-size: 13px;
+    font-weight: 600;
+}
+
+.record-btn:hover {
+    background: rgba(255, 255, 255, 0.2);
+    border-color: rgba(255, 255, 255, 0.4);
+}
+
+.record-btn.recording {
+    background: rgba(255, 0, 0, 0.15);
+    border-color: #ff0000;
+    box-shadow: 0 0 20px rgba(255, 0, 0, 0.3);
+}
+
+.record-btn.recording .record-icon {
+    border-radius: 4px;
+    background: #ff0000;
+}
+
+.record-icon {
+    width: 16px;
+    height: 16px;
+    background: #ff0000;
+    border-radius: 50%;
+    transition: all 0.3s ease;
+    box-shadow: 0 0 10px #ff0000;
+}
