@@ -249,3 +249,50 @@ function detectLoop() {
         animFrameId = requestAnimationFrame(detectLoop);
     }
 }
+document.getElementById('startCameraBtn').addEventListener('click', async () => {
+    const btn = document.getElementById('startCameraBtn');
+    btn.textContent = 'Loading engine...';
+    btn.disabled = true;
+    try {
+        audio.init();
+
+        if (video.srcObject) {
+            video.srcObject.getTracks().forEach(track => track.stop());
+            video.srcObject = null;
+        }
+        if (animFrameId) cancelAnimationFrame(animFrameId);
+
+        const vision = await FilesetResolver.forVisionTasks(
+            'https://cdn.jsdelivr.net/npm/@mediapipe/tasks-vision@0.10.14/wasm',
+        );
+        if (handLandmarker) handLandmarker.close();
+        handLandmarker = await HandLandmarker.createFromOptions(vision, {
+            baseOptions: {
+                modelAssetPath: 'https://storage.googleapis.com/mediapipe-models/hand_landmarker/hand_landmarker/float16/1/hand_landmarker.task',
+                delegate: 'GPU',
+            },
+            runningMode: 'VIDEO',
+            numHands: 2,
+            minHandDetectionConfidence: 0.5,
+            minHandPresenceConfidence: 0.5,
+            minTrackingConfidence: 0.5,
+        });
+
+        const stream = await navigator.mediaDevices.getUserMedia({
+            video: { facingMode: 'user', width: { ideal: 1280 }, height: { ideal: 720 } },
+            audio: false,
+        });
+        video.srcObject = stream;
+        video.onloadedmetadata = () => {
+            video.play();
+            canvas.width = video.videoWidth;
+            canvas.height = video.videoHeight;
+            document.getElementById('cameraOverlay').style.display = 'none';
+            animFrameId = requestAnimationFrame(detectLoop);
+        };
+    } catch (err) {
+        console.error(err);
+        btn.textContent = 'Retry';
+        btn.disabled = false;
+    }
+});
