@@ -88,3 +88,45 @@ export class Fireball {
         ctx.globalAlpha = 1.0;
     }
 }
+export class Heart {
+    constructor(x, y) {
+        this.x = x; this.y = y;
+        this.vx = (Math.random() - 0.5) * 6;
+        this.vy = -Math.random() * 5 - 2; // drift upward
+        this.size = 10 + Math.random() * 30;
+        this.life = 5 + Math.random() * 5; // seconds
+        this.maxLife = this.life;
+        this.hue = 300 + Math.random() * 50; // pink-magenta range
+    }
+
+    update(canvas) {
+        this.x += this.vx;
+        this.y += this.vy;
+        // Bounce off walls and floor
+        if (this.x < 0 || this.x > canvas.width) this.vx *= -1;
+        if (this.y < 0) this.vy *= -1;
+        if (this.y > canvas.height) {
+            this.y = canvas.height;
+            this.vy *= -0.8;
+        }
+        this.life -= 1 / 60;
+        if (this.life <= 0) {
+            spawnParticles(this.x, this.y, 30, () => `hsl(${this.hue}, 100%, 60%)`, 3);
+            audio.play('heart');
+        }
+    }
+
+    draw(ctx) {
+        ctx.save();
+        ctx.globalAlpha = Math.min(1.0, this.life * 2); // fade near the end
+        ctx.fillStyle = `hsl(${this.hue}, 100%, 60%)`;
+        ctx.shadowBlur = 15;
+        ctx.shadowColor = ctx.fillStyle;
+        ctx.translate(this.x, this.y);
+        const s = this.size / 15;
+        ctx.scale(s, s);
+        drawHeartPath(ctx);
+        ctx.fill();
+        ctx.restore();
+    }
+}
