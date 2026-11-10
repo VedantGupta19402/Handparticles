@@ -62,3 +62,29 @@ export class AudioEngine {
             osc.stop(now + 0.5);
             return;
         }
+        if (type === 'heart') {
+            osc.type = 'sine';
+            osc.frequency.setValueAtTime(400, now);
+            osc.frequency.setValueAtTime(600, now + 0.1);
+            gain.gain.setValueAtTime(0, now);
+            gain.gain.linearRampToValueAtTime(0.2, now + 0.05);
+            gain.gain.exponentialRampToValueAtTime(0.01, now + 0.3);
+            osc.start(now);
+            osc.stop(now + 0.3);
+            return;
+        }
+
+        if (type === 'sparkle') {
+            osc.type = 'triangle';
+            osc.frequency.setValueAtTime(900, now);
+            osc.frequency.exponentialRampToValueAtTime(1800, now + 0.25);
+            gain.gain.setValueAtTime(0.15, now);
+            gain.gain.exponentialRampToValueAtTime(0.01, now + 0.25);
+            osc.start(now);
+            osc.stop(now + 0.25);
+        }
+    }
+}
+
+// Shared singleton
+export const audio = new AudioEngine();
