@@ -18,3 +18,14 @@ export const THEMES = {
     Lava:       { colors: ['#ff2200', '#ff8800', '#ffff00'], core: '#ffffff' },
     Ocean:      { colors: ['#00e5ff', '#0088ff'],            core: '#ffffff' },
 };
+// Extended palettes
+THEMES.Galaxy      = { colors: ['#cc00ff', '#ff00ff', '#ffffff'], core: '#ffffff' };
+THEMES.Matrix      = { colors: ['#00ff00', '#00bb00'],            core: '#ccffcc' };
+THEMES.Frostbite   = { colors: ['#ffffff', '#aaddff', '#4499ff'], core: '#ffffff' };
+THEMES.GoldenHour  = { colors: ['#ff9900', '#ffdd00', '#ff6688'], core: '#fff0cc' };
+THEMES.Synthwave   = { colors: ['#ff00ff', '#00ffff', '#ff0077'], core: '#ffccff' };
+THEMES.NeonDemon   = { colors: ['#ff0000', '#cc0000', '#ff4444'], core: '#ff9999' };
+THEMES.Ultraviolet = { colors: ['#7b2fff', '#b26bff', '#e0c3ff'], core: '#f3e6ff' };
+
+export const DEFAULT_THEME = 'Aurora';
+export const THEME_KEYS = Object.keys(THEMES);
