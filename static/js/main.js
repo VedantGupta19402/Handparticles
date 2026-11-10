@@ -156,3 +156,38 @@ function updateGestureUI(hands, actionText) {
     gestEl.textContent = GESTURE_LABELS[key];
     gestEl.classList.add(`gesture-${key}`);
 }
+function processHandGestures(hands) {
+    let makingHeart = false;
+
+    hands.forEach((hand, i) => {
+        drawHand(ctx, hand, i, currentTheme, frameCount);
+
+        if (isFingerHeart(hand)) {
+            heartCharges[i] = Math.min(60, (heartCharges[i] || 0) + 2);
+            const progress = heartCharges[i] / 60;
+            const hx = (hand[4].x + hand[8].x) / 2 * canvas.width;
+            const hy = (hand[4].y + hand[8].y) / 2 * canvas.height;
+            drawHeartWireframe(ctx, hx, hy, 40, progress);
+
+            if (progress >= 1.0) {
+                makingHeart = true;
+                if (frameCount >= nextHeartSpawn) {
+                    hearts.push(new Heart(hand[8].x * canvas.width, hand[8].y * canvas.height));
+                    nextHeartSpawn = frameCount + 30 + Math.random() * 150;
+                    audio.play('heart');
+                }
+            }
+        } else {
+            heartCharges[i] = Math.max(0, (heartCharges[i] || 0) - 5);
+        }
+
+        // Peace sign: sparkle shower from the fingertips
+        if (detectGesture(hand) === 'peace' && frameCount >= nextSparkleAt) {
+            const tip = hand[8];
+            sparkleBurst(tip.x * canvas.width, tip.y * canvas.height);
+            nextSparkleAt = frameCount + 45;
+        }
+    });
+
+    return makingHeart;
+}
