@@ -53,3 +53,26 @@ function updateFps(now) {
         framesThisSecond = 0;
     }
 }
+function processFireball(hands) {
+    const W = canvas.width;
+    const H = canvas.height;
+    if (throwCooldown > 0) throwCooldown--;
+
+    let actionText = null;
+    let chargeRadius = 0;
+    let chargePos = null;
+    let isCharging = false;
+    let v1 = { vx: 0, vy: 0, speed: 0 };
+    let v2 = { vx: 0, vy: 0, speed: 0 };
+
+    // Two palms close together rub a charge into existence
+    if (hands.length === 2 && prevHands && prevHands.length === 2) {
+        const c1 = palmCenter(hands[0]);
+        const c2 = palmCenter(hands[1]);
+        if (Math.hypot(c1.x - c2.x, c1.y - c2.y) < 0.4) {
+            isCharging = true;
+            v1 = getVelocity(c1, palmCenter(prevHands[0]));
+            v2 = getVelocity(c2, palmCenter(prevHands[1]));
+            pendingFireballPos = { x: (c1.x + c2.x) / 2 * W, y: (c1.y + c2.y) / 2 * H };
+        }
+    }
