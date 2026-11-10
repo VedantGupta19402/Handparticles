@@ -341,3 +341,45 @@ html, body {
     transition: all 0.3s ease;
     box-shadow: 0 0 10px #ff0000;
 }
+/* ── RESPONSIVE ────────────────────────────────────────────────── */
+@media (max-width: 768px) {
+    .stats-panel-top, .stats-panel-middle {
+        min-width: 140px;
+        padding: 10px 14px;
+    }
+    .stats-panel-middle { top: 125px; }
+    .stat-value  { font-size: 13px; }
+    .theme-btn   { padding: 7px 10px; font-size: 10px; }
+    .theme-selector { right: 10px; gap: 6px; }
+    .controls-container { bottom: 12px; right: 12px; gap: 8px; }
+    .control-btn { padding: 8px 12px; font-size: 11px; }
+}
+
+@media (max-width: 480px) {
+    .stats-panel-top, .stats-panel-middle {
+        min-width: 120px;
+        padding: 8px 12px;
+        left: 8px;
+        border-radius: 12px;
+    }
+    .stats-panel-top    { top: 10px; }
+    .stats-panel-middle { top: 105px; }
+    .stat-label  { font-size: 9px; }
+    .stat-value  { font-size: 12px; }
+    .theme-selector { right: 6px; padding: 8px 6px; gap: 5px; border-radius: 16px; }
+    .theme-btn   { padding: 6px 8px; }
+    .theme-name  { display: none; }
+    .theme-icon  { font-size: 16px; }
+    .status-pill { top: 12px; padding: 6px 12px; }
+    #recordingStatusText { font-size: 12px; }
+    .record-btn { padding: 8px 12px; font-size: 11px; }
+    .record-icon { width: 14px; height: 14px; }
+}
+
+@media (max-height: 500px) and (orientation: landscape) {
+    .stats-panel-top    { top: 8px; }
+    .stats-panel-middle { top: 90px; }
+    .theme-selector { max-height: 96vh; gap: 4px; padding: 6px 5px; }
+    .theme-btn { padding: 5px 7px; }
+    .theme-name { display: none; }
+}
