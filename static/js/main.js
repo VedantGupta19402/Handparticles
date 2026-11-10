@@ -314,3 +314,56 @@ document.querySelectorAll('.theme-btn').forEach(btn => {
         setTheme(btn.dataset.theme);
     });
 });
+const controlsContainer = document.createElement('div');
+controlsContainer.className = 'controls-container';
+document.body.appendChild(controlsContainer);
+
+const recordBtn = document.getElementById('recordBtn');
+controlsContainer.insertBefore(recordBtn, controlsContainer.firstChild);
+
+const pauseBtn = document.createElement('button');
+pauseBtn.className = 'control-btn';
+pauseBtn.innerHTML = '⏸ Pause';
+pauseBtn.addEventListener('click', () => {
+    isPaused = !isPaused;
+    pauseBtn.innerHTML = isPaused ? '▶️ Resume' : '⏸ Pause';
+    pauseBtn.classList.toggle('active-pause', isPaused);
+});
+controlsContainer.appendChild(pauseBtn);
+
+const muteBtn = document.createElement('button');
+muteBtn.className = 'control-btn';
+muteBtn.innerHTML = '🔇 Muted';
+muteBtn.addEventListener('click', () => {
+    const audible = audio.toggleMute();
+    muteBtn.innerHTML = audible ? '🔊 Audio On' : '🔇 Muted';
+    muteBtn.classList.toggle('active-audio', audible);
+});
+controlsContainer.appendChild(muteBtn);
+
+const shotBtn = document.createElement('button');
+shotBtn.className = 'control-btn';
+shotBtn.innerHTML = '📸 Snapshot';
+shotBtn.addEventListener('click', () => captureScreenshot(canvas));
+controlsContainer.appendChild(shotBtn);
+
+const killBtn = document.createElement('button');
+killBtn.className = 'control-btn kill-btn';
+killBtn.innerHTML = '🛑 Kill Server';
+killBtn.addEventListener('click', () => {
+    fetch('/kill', { method: 'POST' }).catch(() => {});
+    if (video.srcObject) {
+        video.srcObject.getTracks().forEach(track => track.stop());
+        video.srcObject = null;
+    }
+    isPaused = true;
+    document.getElementById('terminatedOverlay').style.display = 'flex';
+});
+controlsContainer.appendChild(killBtn);
+
+setupRecorder({
+    recordBtn,
+    statusPill: document.getElementById('recordingStatusPill'),
+    statusText: document.getElementById('recordingStatusText'),
+    canvas,
+});
