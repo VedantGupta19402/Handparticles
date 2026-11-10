@@ -53,3 +53,65 @@ export function captureScreenshot(canvas) {
         if (blob) downloadBlob(blob, `handparticles_${timestamp()}.png`);
     }, 'image/png');
 }
+// Wires the record button: countdown, capture, auto-stop, status pill.
+export function setupRecorder({ recordBtn, statusPill, statusText, canvas }) {
+    let recorder = null;
+    let countdownTimer = null;
+    let recTimer = null;
+
+    const setDot = (color, animate) => {
+        const dot = statusPill.querySelector('.status-dot');
+        dot.style.background = color;
+        dot.style.animation = animate ? 'blink 1s infinite alternate' : 'none';
+    };
+
+    recordBtn.addEventListener('click', () => {
+        if (recorder || countdownTimer) return;
+        recordBtn.disabled = true;
+        recordBtn.style.opacity = '0.5';
+
+        statusPill.style.display = 'flex';
+        setDot('#ffa500', false);
+
+        let count = RECORD_COUNTDOWN;
+        statusText.textContent = `Starting in ${count}...`;
+        countdownTimer = setInterval(() => {
+            count--;
+            if (count > 0) {
+                statusText.textContent = `Starting in ${count}...`;
+                return;
+            }
+            clearInterval(countdownTimer);
+            countdownTimer = null;
+            begin();
+        }, 1000);
+    });
+
+    function begin() {
+        recorder = startRecording(canvas, () => {
+            statusPill.style.display = 'none';
+            recordBtn.disabled = false;
+            recordBtn.style.opacity = '1';
+            recordBtn.classList.remove('recording');
+            recordBtn.querySelector('.record-text').textContent = 'Record';
+            recorder = null;
+            clearInterval(recTimer);
+        });
+
+        recordBtn.classList.add('recording');
+        recordBtn.querySelector('.record-text').textContent = 'Recording';
+        setDot('#ff0000', true);
+
+        let remaining = RECORD_SECONDS;
+        statusText.textContent = `● Recording ${remaining}s`;
+        recTimer = setInterval(() => {
+            remaining--;
+            if (remaining > 0) {
+                statusText.textContent = `● Recording ${remaining}s`;
+            } else {
+                clearInterval(recTimer);
+                if (recorder && recorder.state !== 'inactive') recorder.stop();
+            }
+        }, 1000);
+    }
+}
