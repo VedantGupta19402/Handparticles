@@ -105,3 +105,15 @@ Thresholds live in `static/js/config.js` (`PINCH_THRESHOLD`, `FIST_THRESHOLD`, `
 
 ---
 
+## Effects
+
+| Effect | Activation | Behaviour |
+|--------|-----------|-----------|
+| **Fireball** 🔥 | Rub two palms together | Orb charges with friction, auto-throws at max size, flick both palms to hurl early |
+| **Single-hand throw** 🔥 | Flick one open hand | Instant fireball projectile along the flick vector |
+| **Floating hearts** 💕 | Hold the finger heart pose | Hearts drift up, bounce off walls, burst into particles on expiry |
+| **Sparkle burst** ✨ | Peace sign | Aurora-coloured sparks spray from the index fingertip |
+| **Constellation** 🕸 | Two hands visible | Web of light connects matching fingertips |
+
+---
+
