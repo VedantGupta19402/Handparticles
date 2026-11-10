@@ -78,3 +78,14 @@ def _local_ip():
         return ip
     except OSError:
         return "127.0.0.1"
+BANNER = r"""
+================================================
+   H A N D P A R T I C L E S
+   real-time hand-tracked particle playground
+================================================
+"""
+
+
+def sigint_handler(sig, frame):
+    print("\nShutting down HandParticles server...")
+    sys.exit(0)
