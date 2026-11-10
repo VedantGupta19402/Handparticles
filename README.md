@@ -91,3 +91,17 @@ Then open **https://localhost:5000** and click *Enable Camera*.
 
 ---
 
+## Gestures
+
+| Gesture | Trigger | Feedback |
+|---------|---------|----------|
+| **Pinch** 🤏 | Thumb tip to index tip within 6% of frame width | Pink label + indicator |
+| **Peace** ✌️ | Index and middle up and apart, ring and pinky curled | Gold label + sparkle shower |
+| **Fist** ✊ | All fingertips within 12% of palm | Orange label + bass tone |
+| **Open hand** 🖐 | Default whenever the hand is neither pinched nor closed | Cyan label |
+| **Finger heart** 💕 | Thumb and index close, pointing up, other fingers curled | Charge ring, then floating hearts |
+
+Thresholds live in `static/js/config.js` (`PINCH_THRESHOLD`, `FIST_THRESHOLD`, `PEACE_MIN_GAP`) so you can tune them to your hand size and camera distance. The engine recieves a fresh landmark frame on every animation tick, so gesture changes register within a single frame.
+
+---
+
