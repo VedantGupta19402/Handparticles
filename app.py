@@ -60,3 +60,11 @@ def health():
     with theme_lock:
         theme = theme_state["current"]
     return jsonify({"status": "ok", "service": "handparticles", "theme": theme})
+@app.route("/kill", methods=["POST"])
+def kill_session():
+    """Disconnect the client without shutting down the server."""
+    print("Kill request received - disconnecting client session.")
+    return jsonify({
+        "status": "success",
+        "message": "Client session terminated. Server remains running.",
+    })
