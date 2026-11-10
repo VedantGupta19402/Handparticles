@@ -30,3 +30,15 @@
                 <p class="hint">Restart the server from your terminal to continue.</p>
             </div>
         </div>
+        <video id="videoElement" autoplay playsinline muted style="display:none;"></video>
+        <canvas id="outputCanvas"></canvas>
+
+        <!-- Live stats -->
+        <div class="stats-panel-top">
+            <div class="stat-row"><span class="stat-label">Hands</span><span class="stat-value" id="handCount">0</span></div>
+            <div class="stat-row"><span class="stat-label">FPS</span><span class="stat-value" id="fps">0</span></div>
+        </div>
+        <div class="stats-panel-middle">
+            <div class="stat-row"><span class="stat-label">Gesture</span><span class="stat-value gesture-text" id="gesture">&mdash;</span></div>
+            <div class="stat-row"><span class="stat-label">Spread</span><span class="stat-value" id="spread">0%</span></div>
+        </div>
