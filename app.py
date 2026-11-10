@@ -7,6 +7,7 @@ so no video data ever leaves the browser.
 """
 
 import logging
+import os
 import signal
 import socket
 import sys
@@ -92,12 +93,25 @@ def sigint_handler(sig, frame):
 if __name__ == "__main__":
     signal.signal(signal.SIGINT, sigint_handler)
 
+    # Plain HTTP by default: browsers treat localhost as a secure context,
+    # so camera access works without any certificate warning. Set
+    # HANDPARTICLES_SSL=1 to serve HTTPS with a self-signed certificate
+    # (needed when other devices on your LAN open the app).
+    use_ssl = os.environ.get("HANDPARTICLES_SSL", "").lower() in ("1", "true", "yes")
+    scheme = "https" if use_ssl else "http"
+
     print(BANNER)
-    print(f"UI address : https://{_local_ip()}:5000")
-    print("Local URL  : https://127.0.0.1:5000")
+    print(f"UI address : {scheme}://{_local_ip()}:5000")
+    print(f"Local URL  : {scheme}://127.0.0.1:5000")
     print("================================================\n")
 
     try:
-        app.run(debug=False, threaded=True, host="0.0.0.0", port=5000, ssl_context="adhoc")
+        app.run(
+            debug=False,
+            threaded=True,
+            host="0.0.0.0",
+            port=5000,
+            ssl_context="adhoc" if use_ssl else None,
+        )
     except KeyboardInterrupt:
         pass

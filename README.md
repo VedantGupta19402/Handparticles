@@ -60,7 +60,7 @@ All inference runs in-browser via WASM - no backend ML load, no video data leavi
 | **Rendering** | HTML5 Canvas 2D |
 | **Audio** | Web Audio API (fully procedural) |
 | **Frontend** | HTML5, CSS3 glassmorphism, vanilla ES modules |
-| **Security** | HTTPS with adhoc SSL, no external data transmission |
+| **Security** | Plain HTTP on localhost (secure context), optional adhoc SSL, no external data transmission |
 
 ---
 
@@ -83,9 +83,9 @@ pip install -r requirements.txt
 python app.py
 ```
 
-Then open **https://localhost:5000** and click *Enable Camera*.
+Then open **http://localhost:5000** and click *Enable Camera*.
 
-> ⚠️ Camera access requires a secure context, so the app serves itself over HTTPS with a self-signed certificate - accept the browser warning on first load.
+> 💡 The server runs plain HTTP by default - browsers treat `localhost` as a secure context, so camera access works with no certificate warning. To open the app from other devices on your LAN, run with `HANDPARTICLES_SSL=1` for HTTPS and accept the self-signed certificate warning there.
 
 **Requirements:** Python 3.8+, a webcam and a modern browser. GPU is optional but recommended for higher FPS.
 
@@ -178,15 +178,15 @@ handparticles/
 
 ```bash
 # Check the active theme
-curl -k https://localhost:5000/get_theme
+curl http://localhost:5000/get_theme
 
 # Switch to Matrix
-curl -k -X POST https://localhost:5000/update_theme \
+curl -X POST http://localhost:5000/update_theme \
   -H "Content-Type: application/json" \
   -d '{"theme": "Matrix"}'
 
 # Liveness
-curl -k https://localhost:5000/health
+curl http://localhost:5000/health
 ```
 
 ---
@@ -206,7 +206,7 @@ export const RECORD_COUNTDOWN = 5;
 `app.py` - server behaviour:
 
 ```python
-app.run(debug=False, threaded=True, host='0.0.0.0', port=5000, ssl_context='adhoc')
+app.run(debug=False, threaded=True, host='0.0.0.0', port=5000, ssl_context=None)  # set to 'adhoc' for HTTPS
 ```
 
 For strict local-only access, change the host from `'0.0.0.0'` to `'127.0.0.1'`.
@@ -246,7 +246,7 @@ Tips for smoother tracking:
 
 | Symptom | Fix |
 |---------|-----|
-| Camera permission denied | Use `https://localhost:5000` and accept the self-signed certificate warning |
+| Camera permission denied | Use `http://localhost:5000` (localhost is a secure context). From other devices, run with `HANDPARTICLES_SSL=1` and accept the certificate warning |
 | No hands detected | Improve lighting; lower `minHandDetectionConfidence` in `main.js` from 0.5 to 0.3 |
 | Low FPS | Close background tabs; try Chrome; keep GPU acceleration enabled |
 | Fireballs never appear | Bring both palms close and rub them; check both hands are detected |

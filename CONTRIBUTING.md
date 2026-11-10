@@ -7,7 +7,7 @@ Thanks for wanting to help! This project is small on purpose, so the rules are l
 1. Fork and clone the repo
 2. `python -m venv venv && source venv/bin/activate` (or `venv\Scripts\activate` on Windows)
 3. `pip install -r requirements.txt`
-4. `python app.py` and open https://localhost:5000
+4. `python app.py` and open http://localhost:5000
 
 ## Ground rules
 
