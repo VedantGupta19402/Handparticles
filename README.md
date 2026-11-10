@@ -117,3 +117,24 @@ Thresholds live in `static/js/config.js` (`PINCH_THRESHOLD`, `FIST_THRESHOLD`, `
 
 ---
 
+## Themes
+
+Click any button in the right-hand rail to switch instantly, or press **1-9**. Themes auto-rotate every 15 seconds until you pick one manually.
+
+| Theme | Palette |
+|-------|---------|
+| 🌠 Aurora | Spring green → cyan → violet (default) |
+| 🌃 Cyberpunk | Neon pink + cyan |
+| 🌈 Rainbow | Red, green, blue (hue-cycling) |
+| 🔥 Lava | Red, orange, yellow |
+| 🌊 Ocean | Aqua + sky blue |
+| 🌌 Galaxy | Purple, magenta, white |
+| 💻 Matrix | Neon green + dark green |
+| ❄️ Frostbite | White, light blue, sky blue |
+| 🌅 GoldenHour | Orange, gold, pink |
+| 🕹️ Synthwave | Magenta, cyan, hot pink |
+| 😈 NeonDemon | Deep red, crimson, light red |
+| 🌀 Ultraviolet | Violet, lavender, pale lilac |
+
+---
+
