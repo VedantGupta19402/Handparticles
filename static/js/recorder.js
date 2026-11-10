@@ -36,3 +36,20 @@ export function startRecording(canvas, onState) {
     recorder.start();
     return recorder;
 }
+export function downloadBlob(blob, filename) {
+    const url = URL.createObjectURL(blob);
+    const a = document.createElement('a');
+    document.body.appendChild(a);
+    a.style = 'display: none';
+    a.href = url;
+    a.download = filename;
+    a.click();
+    window.URL.revokeObjectURL(url);
+}
+
+// Freeze the current frame to a PNG
+export function captureScreenshot(canvas) {
+    canvas.toBlob((blob) => {
+        if (blob) downloadBlob(blob, `handparticles_${timestamp()}.png`);
+    }, 'image/png');
+}
