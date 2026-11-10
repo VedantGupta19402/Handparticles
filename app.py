@@ -54,3 +54,9 @@ def update_theme():
     with theme_lock:
         theme_state["current"] = theme
     return jsonify({"status": "success", "theme": theme})
+@app.route("/health", methods=["GET"])
+def health():
+    """Liveness probe - handy for containers and uptime checks."""
+    with theme_lock:
+        theme = theme_state["current"]
+    return jsonify({"status": "ok", "service": "handparticles", "theme": theme})
