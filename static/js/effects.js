@@ -42,3 +42,49 @@ export function spawnParticles(x, y, count, colorFunc, speedMultiplier = 1) {
         ));
     }
 }
+export class Fireball {
+    constructor(x, y, vx, vy, radius) {
+        this.x = x; this.y = y; this.vx = vx; this.vy = vy;
+        this.radius = radius; this.life = 1.0; this.age = 0; this.trail = [];
+    }
+
+    update() {
+        this.x += this.vx;
+        this.y += this.vy;
+        this.life -= 0.015;
+        this.age++;
+        for (let i = 0; i < 3; i++) {
+            this.trail.push({
+                x: this.x + (Math.random() - 0.5) * this.radius,
+                y: this.y + (Math.random() - 0.5) * this.radius,
+                vx: -this.vx * 0.1 + (Math.random() - 0.5) * 2,
+                vy: -this.vy * 0.1 + (Math.random() - 0.5) * 2,
+                life: 1.0,
+                r: this.radius * (0.2 + Math.random() * 0.3),
+                hue: 10 + Math.random() * 30,
+            });
+        }
+        this.trail = this.trail.filter(e => e.life > 0);
+        this.trail.forEach(e => { e.x += e.vx; e.y += e.vy; e.life -= 0.05; e.r *= 0.95; });
+    }
+
+    draw(ctx) {
+        for (const e of this.trail) {
+            ctx.globalAlpha = e.life;
+            ctx.fillStyle = `hsl(${e.hue}, 100%, 50%)`;
+            ctx.beginPath();
+            ctx.arc(e.x, e.y, e.r, 0, Math.PI * 2);
+            ctx.fill();
+        }
+        ctx.globalAlpha = this.life;
+        const g = ctx.createRadialGradient(this.x, this.y, 0, this.x, this.y, this.radius);
+        g.addColorStop(0, '#ffffff');
+        g.addColorStop(0.2, '#ffaa00');
+        g.addColorStop(1, 'rgba(255,0,0,0)');
+        ctx.fillStyle = g;
+        ctx.beginPath();
+        ctx.arc(this.x, this.y, this.radius, 0, Math.PI * 2);
+        ctx.fill();
+        ctx.globalAlpha = 1.0;
+    }
+}
