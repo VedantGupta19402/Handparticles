@@ -79,3 +79,21 @@ html, body {
     font-size: 11px !important;
     color: rgba(255,255,255,0.35) !important;
 }
+/* ── PRIMARY BUTTON ────────────────────────────────────────────── */
+.primary-btn {
+    padding: 14px 36px;
+    background: linear-gradient(135deg, #00ffa3, #7b2fff);
+    border: none;
+    border-radius: 40px;
+    color: #000;
+    font-size: 17px;
+    font-weight: 700;
+    font-family: inherit;
+    cursor: pointer;
+    box-shadow: 0 0 30px rgba(0,255,163,0.35), 0 0 60px rgba(123,47,255,0.25);
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.primary-btn:hover  { transform: scale(1.05); box-shadow: 0 0 50px rgba(123,47,255,0.5); }
+.primary-btn:active { transform: scale(0.97); }
+.primary-btn:disabled { opacity: 0.6; cursor: wait; transform: none; }
