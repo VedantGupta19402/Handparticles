@@ -38,3 +38,16 @@ All inference runs in-browser via WASM - no backend ML load, no video data leavi
 | ✨ Constellation web | Lines between matching fingertips of both hands |
 | 🔥 Fireballs | Charge via palm friction, auto-throw at full size, flick to hurl |
 
+| 💕 Heart spawner | Hold a finger heart to spawn floating hearts with a particle burst on expiry |
+| ✌️ Sparkle bursts | Peace sign showers aurora-coloured sparks from your fingertips |
+| 🎙️ Reactive audio | Ambient drone synced to hand spread plus fireball/heart/sparkle SFX (Web Audio API) |
+| 🎥 Video recording | Up to 60 seconds, MP4/WebM export with countdown and auto-save |
+| 📸 Snapshots | One-click PNG capture of the current frame |
+| ⌨️ Keyboard shortcuts | Themes on 1-9, Space to pause, M mute, S snapshot, R record |
+| 🎛️ Live stats HUD | FPS, hand count, gesture and spread, updated every frame |
+| 📱 Responsive | Mobile and desktop, portrait and landscape, glassmorphism UI |
+| ⚡ Client-side only | All inference in-browser - zero backend ML load |
+| 🩺 Health endpoint | `/health` liveness probe for containers and uptime checks |
+
+---
+
