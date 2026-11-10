@@ -191,3 +191,35 @@ curl -k https://localhost:5000/health
 
 ---
 
+## Configuration
+
+`static/js/config.js` - gesture thresholds and recording limits:
+
+```javascript
+export const PINCH_THRESHOLD = 0.06;
+export const FIST_THRESHOLD  = 0.12;
+export const PEACE_MIN_GAP   = 0.04;
+export const RECORD_SECONDS   = 60;
+export const RECORD_COUNTDOWN = 5;
+```
+
+`app.py` - server behaviour:
+
+```python
+app.run(debug=False, threaded=True, host='0.0.0.0', port=5000, ssl_context='adhoc')
+```
+
+For strict local-only access, change the host from `'0.0.0.0'` to `'127.0.0.1'`.
+
+### Keyboard Shortcuts
+
+| Key | Action |
+|-----|--------|
+| `1` - `9` | Switch theme |
+| `Space` | Pause / resume |
+| `M` | Mute / unmute |
+| `S` | Snapshot to PNG |
+| `R` | Start recording |
+
+---
+
