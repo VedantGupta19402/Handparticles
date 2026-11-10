@@ -13,3 +13,17 @@ Real-time hand-tracked particle playground.
 
 ---
 
+## Overview
+
+HandParticles streams your webcam through a fully client-side pipeline:
+
+1. **Detects up to 2 hands** with MediaPipe Hand Landmarker (WASM, GPU-accelerated)
+2. **Extracts 21 landmarks** per hand and classifies **5 gestures** (pinch, peace, fist, open hand, finger heart)
+3. **Renders glowing neon wireframes** and a constellation web between both hands
+4. **Spawns interactive effects** - fireballs charged by rubbing your palms, floating hearts, sparkle bursts
+5. **Wraps it all in a glassmorphism UI** with live stats, 12 themes and video recording
+
+All inference runs in-browser via WASM - no backend ML load, no video data leaving your device, full privacy.
+
+---
+
