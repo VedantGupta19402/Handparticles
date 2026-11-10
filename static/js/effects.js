@@ -166,3 +166,21 @@ export function sparkleBurst(x, y) {
     spawnParticles(x, y, 40, () => colors[Math.floor(Math.random() * colors.length)], 2);
     audio.play('sparkle');
 }
+// Advances and renders every active effect pool
+export function updateAndDrawEffects(ctx, canvas) {
+    for (let i = particles.length - 1; i >= 0; i--) {
+        particles[i].update(canvas.height);
+        particles[i].draw(ctx);
+        if (particles[i].life <= 0) particles.splice(i, 1);
+    }
+    for (let i = hearts.length - 1; i >= 0; i--) {
+        hearts[i].update(canvas);
+        hearts[i].draw(ctx);
+        if (hearts[i].life <= 0) hearts.splice(i, 1);
+    }
+    for (let i = fireballs.length - 1; i >= 0; i--) {
+        fireballs[i].update();
+        fireballs[i].draw(ctx);
+        if (fireballs[i].life <= 0) fireballs.splice(i, 1);
+    }
+}
