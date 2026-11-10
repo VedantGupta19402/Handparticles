@@ -26,3 +26,10 @@ export class AudioEngine {
             this.osc.start();
         }
     }
+    toggleMute() {
+        this.init();
+        this.isMuted = !this.isMuted;
+        const target = this.isMuted ? 0 : 0.8;
+        this.master.gain.setTargetAtTime(target, this.ctx.currentTime, 0.1);
+        return !this.isMuted;
+    }
