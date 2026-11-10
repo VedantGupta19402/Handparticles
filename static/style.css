@@ -383,3 +383,26 @@ html, body {
     .theme-btn { padding: 5px 7px; }
     .theme-name { display: none; }
 }
+/* ── SHORTCUT HINT BAR ─────────────────────────────────────────── */
+.shortcut-hint {
+    position: absolute;
+    bottom: 16px;
+    left: 16px;
+    display: flex;
+    gap: 14px;
+    padding: 8px 14px;
+    background: rgba(255,255,255,0.05);
+    backdrop-filter: blur(14px);
+    -webkit-backdrop-filter: blur(14px);
+    border: 1px solid rgba(255,255,255,0.1);
+    border-radius: 12px;
+    color: rgba(255,255,255,0.45);
+    font-size: 11px;
+    z-index: 10;
+}
+
+.shortcut-hint b { color: rgba(255,255,255,0.85); }
+
+@media (max-width: 768px) {
+    .shortcut-hint { display: none; }
+}
