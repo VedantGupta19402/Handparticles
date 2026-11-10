@@ -28,3 +28,54 @@ html, body {
     object-fit: contain;
     display: block;
 }
+/* ── CAMERA OVERLAY ────────────────────────────────────────────── */
+.camera-overlay {
+    position: absolute;
+    inset: 0;
+    background: radial-gradient(ellipse at center, rgba(6,0,26,0.97) 0%, rgba(0,0,0,0.99) 100%);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 50;
+}
+
+.overlay-inner {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    padding: 32px 24px;
+    max-width: 480px;
+    gap: 16px;
+}
+
+.logo-glow {
+    font-size: 64px;
+    filter: drop-shadow(0 0 20px #00ffa3) drop-shadow(0 0 40px #7b2fff);
+    animation: pulse 2s ease-in-out infinite;
+}
+
+@keyframes pulse {
+    0%, 100% { filter: drop-shadow(0 0 20px #00ffa3) drop-shadow(0 0 40px #7b2fff); }
+    50%      { filter: drop-shadow(0 0 40px #00ffa3) drop-shadow(0 0 70px #7b2fff); }
+}
+
+.overlay-inner h1 {
+    font-size: clamp(28px, 6vw, 48px);
+    font-weight: 800;
+    background: linear-gradient(90deg, #00ffa3, #7b2fff);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    letter-spacing: -1px;
+}
+
+.overlay-inner p {
+    font-size: clamp(13px, 2.5vw, 16px);
+    color: rgba(255,255,255,0.65);
+    line-height: 1.6;
+}
+
+.hint {
+    font-size: 11px !important;
+    color: rgba(255,255,255,0.35) !important;
+}
