@@ -44,3 +44,21 @@ export class AudioEngine {
         const freq = 50 + spreadPercent * 1.5 + (handCount === 2 ? 100 : 0);
         this.osc.frequency.setTargetAtTime(freq, this.ctx.currentTime, 0.1);
     }
+    play(type) {
+        if (this.isMuted) return;
+        const now = this.ctx.currentTime;
+        const osc = this.ctx.createOscillator();
+        const gain = this.ctx.createGain();
+        osc.connect(gain);
+        gain.connect(this.master);
+
+        if (type === 'fireball') {
+            osc.type = 'sawtooth';
+            osc.frequency.setValueAtTime(150, now);
+            osc.frequency.exponentialRampToValueAtTime(40, now + 0.5);
+            gain.gain.setValueAtTime(0.3, now);
+            gain.gain.exponentialRampToValueAtTime(0.01, now + 0.5);
+            osc.start(now);
+            osc.stop(now + 0.5);
+            return;
+        }
