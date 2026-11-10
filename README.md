@@ -253,3 +253,19 @@ Tips for smoother tracking:
 | Audio silent | Click the mute button once - browsers require a gesture before audio starts |
 | Recording saves as `.webm` | Your browser lacks an MP4 encoder; the file plays fine, only the extension is advisory |
 
+## Roadmap
+
+- [ ] More gestures (thumbs up, rock horns)
+- [ ] Skeleton colour follows finger velocity
+- [ ] WebGPU renderer
+- [ ] Screenshot gallery in-app
+
+## License
+
+MIT - see [LICENSE](LICENSE).
+
+## Acknowledgements
+
+- [MediaPipe](https://mediapipe.dev/) by Google - hand landmark detection
+- [Flask](https://flask.palletsprojects.com/) - the tiny bit of Python this needs
+- The original GestEffect demo (MIT) that this project was rebuilt and extended from
