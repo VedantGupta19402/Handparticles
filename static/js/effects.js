@@ -160,3 +160,9 @@ export function drawHeartWireframe(ctx, x, y, size, progress) {
     }
     ctx.restore();
 }
+// Peace sign payoff: a shower of aurora-coloured sparks
+export function sparkleBurst(x, y) {
+    const colors = ['#00ffa3', '#00c8ff', '#7b2fff', '#eafffa'];
+    spawnParticles(x, y, 40, () => colors[Math.floor(Math.random() * colors.length)], 2);
+    audio.play('sparkle');
+}
