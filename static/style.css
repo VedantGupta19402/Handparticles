@@ -97,3 +97,51 @@ html, body {
 .primary-btn:hover  { transform: scale(1.05); box-shadow: 0 0 50px rgba(123,47,255,0.5); }
 .primary-btn:active { transform: scale(0.97); }
 .primary-btn:disabled { opacity: 0.6; cursor: wait; transform: none; }
+/* ── STATS PANELS ─────────────────────────────────────────────── */
+.stats-panel-top,
+.stats-panel-middle {
+    position: absolute;
+    left: 16px;
+    background: rgba(255,255,255,0.07);
+    backdrop-filter: blur(14px);
+    -webkit-backdrop-filter: blur(14px);
+    border: 1px solid rgba(255,255,255,0.15);
+    border-radius: 16px;
+    padding: 14px 18px;
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    min-width: 160px;
+    z-index: 10;
+}
+
+.stats-panel-top    { top: 20px; }
+.stats-panel-middle { top: 140px; }
+
+.stat-row {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 16px;
+}
+
+.stat-label {
+    font-size: 11px;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.8px;
+    color: rgba(255,255,255,0.5);
+}
+
+.stat-value {
+    font-size: 15px;
+    font-weight: 700;
+    color: #00ffa3;
+    text-shadow: 0 0 8px rgba(0,255,163,0.6);
+    animation: glow 2.5s ease-in-out infinite;
+}
+
+@keyframes glow {
+    0%, 100% { text-shadow: 0 0 6px rgba(0,255,163,0.5); }
+    50%      { text-shadow: 0 0 16px rgba(0,255,163,0.9); }
+}
