@@ -125,3 +125,17 @@ function processFireball(hands) {
         fullGrownFrames = 0;
         pendingFireballPos = null;
     }
+    // Quick single-hand throw
+    if (chargeAmount === 0 && hands.length === 1 && prevHands && prevHands.length === 1) {
+        const c = palmCenter(hands[0]);
+        const v = getVelocity(c, palmCenter(prevHands[0]));
+        if (v.speed > 0.04 && throwCooldown === 0) {
+            audio.play('fireball');
+            fireballs.push(new Fireball(c.x * W, c.y * H, v.vx * W, v.vy * H, 60));
+            throwCooldown = 20;
+            actionText = '🔥 THROW';
+        }
+    }
+
+    return { actionText, chargeRadius, chargePos };
+}
