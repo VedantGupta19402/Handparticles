@@ -31,3 +31,11 @@ export function isPeace(lm) {
     const gap = dist(lm[8], lm[12]);
     return indexUp && middleUp && ringDown && pinkyDown && gap > PEACE_MIN_GAP;
 }
+export function calcSpread(lm) {
+    const palm = lm[PALM_INDEX];
+    const reaches = FINGER_TIPS.map(i => dist(palm, lm[i]));
+    const max = Math.max(...reaches);
+    const min = Math.min(...reaches);
+    const spread = ((max - min) / Math.max(max, 0.001)) * 100;
+    return Math.max(0, Math.min(100, spread));
+}
