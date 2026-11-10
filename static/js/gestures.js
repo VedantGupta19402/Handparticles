@@ -22,3 +22,12 @@ export function detectGesture(lm) {
     if (isFist(lm)) return 'fist';
     return 'open';
 }
+export function isPeace(lm) {
+    // Index and middle extended and apart, ring and pinky curled
+    const indexUp  = fingerExtended(lm, 8, 6);
+    const middleUp = fingerExtended(lm, 12, 10);
+    const ringDown  = !fingerExtended(lm, 16, 14);
+    const pinkyDown = !fingerExtended(lm, 20, 18);
+    const gap = dist(lm[8], lm[12]);
+    return indexUp && middleUp && ringDown && pinkyDown && gap > PEACE_MIN_GAP;
+}
