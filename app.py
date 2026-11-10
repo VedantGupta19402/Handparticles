@@ -42,3 +42,15 @@ def get_theme():
     with theme_lock:
         theme = theme_state["current"]
     return jsonify({"theme": theme, "available_themes": VALID_THEMES})
+@app.route("/update_theme", methods=["POST"])
+def update_theme():
+    """Persist a theme selection sent by the client."""
+    data = request.get_json()
+    theme = data.get("theme", DEFAULT_THEME)
+
+    if theme not in VALID_THEMES:
+        return jsonify({"status": "error", "message": "Invalid theme"}), 400
+
+    with theme_lock:
+        theme_state["current"] = theme
+    return jsonify({"status": "success", "theme": theme})
