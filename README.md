@@ -223,3 +223,22 @@ For strict local-only access, change the host from `'0.0.0.0'` to `'127.0.0.1'`.
 
 ---
 
+## Performance
+
+| Metric | Typical value |
+|--------|--------------|
+| Target FPS | 30 |
+| Achieved FPS | 25-30 (CPU), 30-60 (GPU delegate) |
+| End-to-end latency | ~100-150ms |
+| Resolution | 1280x720 (adjustable in `main.js`) |
+| Browser memory | ~150-250MB (WASM model + runtime) |
+
+Tips for smoother tracking:
+
+- Use Chrome or Edge (best WASM + GPU delegate support)
+- Ensure good, front-facing lighting - avoid backlit scenes
+- Set `numHands: 1` in `main.js` if you only ever track one hand
+- Lower camera resolution if your device struggles
+
+---
+
