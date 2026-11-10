@@ -76,3 +76,52 @@ function processFireball(hands) {
             pendingFireballPos = { x: (c1.x + c2.x) / 2 * W, y: (c1.y + c2.y) / 2 * H };
         }
     }
+    if (isCharging || chargeAmount >= 500) {
+        if (isCharging) {
+            const rubSpeed = v1.speed + v2.speed;
+            chargeAmount += 1.0 + rubSpeed * 30.0;
+        }
+        chargeRadius = Math.min(500, chargeAmount * 1.5);
+        chargePos = pendingFireballPos || { x: W / 2, y: H / 2 };
+
+        if (chargeRadius >= 500) {
+            fullGrownFrames++;
+            if (fullGrownFrames > 180) { // ~3s at 60fps
+                audio.play('fireball');
+                const angle = Math.random() * Math.PI * 2;
+                fireballs.push(new Fireball(chargePos.x, chargePos.y, Math.cos(angle) * 15, Math.sin(angle) * 15, chargeRadius));
+                chargeAmount = 0;
+                fullGrownFrames = 0;
+                pendingFireballPos = null;
+                throwCooldown = 30;
+                chargeRadius = 0;
+                actionText = '🔥 AUTO THROW';
+            } else {
+                actionText = '🔥 FULLY CHARGED';
+            }
+        } else {
+            fullGrownFrames = 0;
+            actionText = '🔥 CHARGING';
+        }
+
+        // Flick both palms to hurl the orb
+        if (isCharging && chargeAmount > 30 && throwCooldown === 0) {
+            if (v1.speed > 0.05 && v2.speed > 0.05) {
+                audio.play('fireball');
+                let dx = (v1.vx + v2.vx) * W * 0.5;
+                let dy = (v1.vy + v2.vy) * H * 0.5;
+                if (Math.hypot(dx, dy) < 5) { dx = 0; dy = -15; }
+                fireballs.push(new Fireball(chargePos.x, chargePos.y, dx, dy, Math.max(40, chargeRadius)));
+                chargeAmount = 0;
+                fullGrownFrames = 0;
+                pendingFireballPos = null;
+                throwCooldown = 30;
+                chargeRadius = 0;
+                actionText = '🔥 MASSIVE FIREBALL';
+            }
+        }
+    } else {
+        chargeAmount = 0;
+        fullGrownFrames = 0;
+        pendingFireballPos = null;
+    }
