@@ -58,3 +58,17 @@ export function drawHand(ctx, lm, handIdx, theme, time) {
         drawNeonLine(ctx, lm[a].x * W, lm[a].y * H, lm[b].x * W, lm[b].y * H, color, core);
     }
 }
+// Web of light between matching fingertips of both hands
+export function drawConstellation(ctx, hand1, hand2, theme) {
+    const W = ctx.canvas.width;
+    const H = ctx.canvas.height;
+    const color = THEMES[theme].colors[0];
+    for (const tip of FINGER_TIPS) {
+        drawNeonLine(
+            ctx,
+            hand1[tip].x * W, hand1[tip].y * H,
+            hand2[tip].x * W, hand2[tip].y * H,
+            color, '#ffffff',
+        );
+    }
+}
