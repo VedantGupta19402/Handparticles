@@ -152,3 +152,57 @@ html, body {
 .gesture-text.gesture-fist  { color: #ffa500 !important; text-shadow: 0 0 10px rgba(255,165,0,0.7) !important; }
 .gesture-text.gesture-open  { color: #00ffff !important; }
 .gesture-text.gesture-fire  { color: #ff6b35 !important; text-shadow: 0 0 12px rgba(255,107,53,0.8) !important; }
+/* ── THEME SELECTOR RAIL ───────────────────────────────────────── */
+.theme-selector {
+    position: absolute;
+    right: 16px;
+    top: 50%;
+    transform: translateY(-50%);
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    z-index: 10;
+    max-height: 92vh;
+    overflow-y: auto;
+    overflow-x: hidden;
+    padding: 12px 8px;
+    background: rgba(255,255,255,0.06);
+    backdrop-filter: blur(14px);
+    -webkit-backdrop-filter: blur(14px);
+    border: 1px solid rgba(255,255,255,0.12);
+    border-radius: 20px;
+}
+
+.theme-btn {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    padding: 8px 12px;
+    background: rgba(255,255,255,0.04);
+    border: 1px solid rgba(255,255,255,0.15);
+    border-radius: 20px;
+    color: rgba(255,255,255,0.6);
+    cursor: pointer;
+    font-size: 11px;
+    font-weight: 600;
+    font-family: inherit;
+    text-transform: uppercase;
+    letter-spacing: 0.4px;
+    transition: all 0.25s ease;
+    white-space: nowrap;
+}
+
+.theme-btn:hover {
+    background: rgba(255,255,255,0.12);
+    color: #fff;
+    transform: translateX(-2px);
+}
+
+.theme-btn.active {
+    background: rgba(255,255,255,0.18);
+    border-color: rgba(255,255,255,0.45);
+    color: #fff;
+    box-shadow: 0 0 16px rgba(0,255,163,0.25);
+}
+
+.theme-icon { font-size: 14px; }
