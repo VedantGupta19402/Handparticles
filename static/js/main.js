@@ -90,9 +90,7 @@ function processFireball(hands) {
                 audio.play('fireball');
                 const angle = Math.random() * Math.PI * 2;
                 fireballs.push(new Fireball(chargePos.x, chargePos.y, Math.cos(angle) * 15, Math.sin(angle) * 15, chargeRadius));
-                chargeAmount = 0;
-                fullGrownFrames = 0;
-                pendingFireballPos = null;
+                resetCharge();
                 throwCooldown = 30;
                 chargeRadius = 0;
                 actionText = '🔥 AUTO THROW';
@@ -112,18 +110,14 @@ function processFireball(hands) {
                 let dy = (v1.vy + v2.vy) * H * 0.5;
                 if (Math.hypot(dx, dy) < 5) { dx = 0; dy = -15; }
                 fireballs.push(new Fireball(chargePos.x, chargePos.y, dx, dy, Math.max(40, chargeRadius)));
-                chargeAmount = 0;
-                fullGrownFrames = 0;
-                pendingFireballPos = null;
+                resetCharge();
                 throwCooldown = 30;
                 chargeRadius = 0;
                 actionText = '🔥 MASSIVE FIREBALL';
             }
         }
     } else {
-        chargeAmount = 0;
-        fullGrownFrames = 0;
-        pendingFireballPos = null;
+        resetCharge();
     }
     // Quick single-hand throw
     if (chargeAmount === 0 && hands.length === 1 && prevHands && prevHands.length === 1) {
@@ -389,3 +383,9 @@ window.addEventListener('keydown', (event) => {
         }
     }
 });
+
+function resetCharge() {
+    chargeAmount = 0;
+    fullGrownFrames = 0;
+    pendingFireballPos = null;
+}
