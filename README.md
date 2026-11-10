@@ -51,3 +51,16 @@ All inference runs in-browser via WASM - no backend ML load, no video data leavi
 
 ---
 
+## Tech Stack
+
+| Layer | Technology |
+|-------|-----------|
+| **Backend** | Python 3.8+, Flask 3.0 (serves the UI and persists theme choice) |
+| **Computer vision** | MediaPipe Hand Landmarker 0.10 (WASM, GPU delegate) |
+| **Rendering** | HTML5 Canvas 2D |
+| **Audio** | Web Audio API (fully procedural) |
+| **Frontend** | HTML5, CSS3 glassmorphism, vanilla ES modules |
+| **Security** | HTTPS with adhoc SSL, no external data transmission |
+
+---
+
