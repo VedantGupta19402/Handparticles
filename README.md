@@ -101,7 +101,7 @@ Then open **https://localhost:5000** and click *Enable Camera*.
 | **Open hand** 🖐 | Default whenever the hand is neither pinched nor closed | Cyan label |
 | **Finger heart** 💕 | Thumb and index close, pointing up, other fingers curled | Charge ring, then floating hearts |
 
-Thresholds live in `static/js/config.js` (`PINCH_THRESHOLD`, `FIST_THRESHOLD`, `PEACE_MIN_GAP`) so you can tune them to your hand size and camera distance. The engine recieves a fresh landmark frame on every animation tick, so gesture changes register within a single frame.
+Thresholds live in `static/js/config.js` (`PINCH_THRESHOLD`, `FIST_THRESHOLD`, `PEACE_MIN_GAP`) so you can tune them to your hand size and camera distance. The engine receives a fresh landmark frame on every animation tick, so gesture changes register within a single frame.
 
 ---
 
