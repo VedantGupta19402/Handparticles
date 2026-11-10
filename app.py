@@ -19,3 +19,14 @@ werkzeug_log = logging.getLogger("werkzeug")
 werkzeug_log.setLevel(logging.ERROR)
 
 app = Flask(__name__, template_folder="templates", static_folder="static")
+# --- Theme state -----------------------------------------------------------
+
+VALID_THEMES = [
+    "Aurora", "Cyberpunk", "Rainbow", "Lava", "Ocean",
+    "Galaxy", "Matrix", "Frostbite", "GoldenHour", "Synthwave",
+    "NeonDemon", "Ultraviolet",
+]
+DEFAULT_THEME = "Aurora"
+
+theme_state = {"current": DEFAULT_THEME}
+theme_lock = Lock()
