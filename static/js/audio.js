@@ -33,3 +33,14 @@ export class AudioEngine {
         this.master.gain.setTargetAtTime(target, this.ctx.currentTime, 0.1);
         return !this.isMuted;
     }
+    updateSound(spreadPercent, handCount) {
+        if (!this.osc || this.isMuted) return;
+        if (handCount === 0) {
+            this.gain.gain.setTargetAtTime(0, this.ctx.currentTime, 0.2);
+            return;
+        }
+        const level = 0.05 + (spreadPercent / 100) * 0.1;
+        this.gain.gain.setTargetAtTime(level, this.ctx.currentTime, 0.1);
+        const freq = 50 + spreadPercent * 1.5 + (handCount === 2 ? 100 : 0);
+        this.osc.frequency.setTargetAtTime(freq, this.ctx.currentTime, 0.1);
+    }
