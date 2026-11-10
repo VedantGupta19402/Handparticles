@@ -39,3 +39,21 @@ export function calcSpread(lm) {
     const spread = ((max - min) / Math.max(max, 0.001)) * 100;
     return Math.max(0, Math.min(100, spread));
 }
+export function isFingerHeart(lm) {
+    // Thumb and index tips close together
+    if (dist(lm[4], lm[8]) > 0.08) return false;
+    // Both pointing upwards (y grows downward in image space)
+    if (lm[8].y > lm[9].y || lm[4].y > lm[9].y) return false;
+    // Middle and ring curled (tips below their PIP joints)
+    if (lm[12].y < lm[10].y && lm[16].y < lm[14].y) return false;
+    return true;
+}
+
+export const palmCenter = (lm) => lm[PALM_INDEX];
+
+export function getVelocity(cur, prev) {
+    if (!prev) return { vx: 0, vy: 0, speed: 0 };
+    const vx = cur.x - prev.x;
+    const vy = cur.y - prev.y;
+    return { vx, vy, speed: Math.hypot(vx, vy) };
+}
