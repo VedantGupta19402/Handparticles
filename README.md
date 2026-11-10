@@ -64,3 +64,30 @@ All inference runs in-browser via WASM - no backend ML load, no video data leavi
 
 ---
 
+## Quick Start
+
+```bash
+# 1. Clone the repository
+git clone https://github.com/VedantGupta19402/Handparticles.git
+cd Handparticles
+
+# 2. (Optional) Create a virtual environment
+python -m venv venv
+source venv/bin/activate      # Linux/macOS
+# venv\Scripts\activate     # Windows
+
+# 3. Install dependencies
+pip install -r requirements.txt
+
+# 4. Run the server
+python app.py
+```
+
+Then open **https://localhost:5000** and click *Enable Camera*.
+
+> ⚠️ Camera access requires a secure context, so the app serves itself over HTTPS with a self-signed certificate - accept the browser warning on first load.
+
+**Requirements:** Python 3.8+, a webcam and a modern browser. GPU is optional but recommended for higher FPS.
+
+---
+
