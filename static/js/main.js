@@ -44,3 +44,12 @@ const GESTURE_LABELS = {
     fist: '✊ Fist',
     open: '🖐 Open Hand',
 };
+function updateFps(now) {
+    framesThisSecond++;
+    if (now - lastFpsTime >= 1000) {
+        const fps = Math.round(framesThisSecond / ((now - lastFpsTime) / 1000));
+        document.getElementById('fps').textContent = fps;
+        lastFpsTime = now;
+        framesThisSecond = 0;
+    }
+}
