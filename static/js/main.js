@@ -367,3 +367,25 @@ setupRecorder({
     statusText: document.getElementById('recordingStatusText'),
     canvas,
 });
+// Keyboard shortcuts
+window.addEventListener('keydown', (event) => {
+    if (event.repeat) return;
+    const key = event.key.toLowerCase();
+
+    if (key === ' ') {
+        event.preventDefault();
+        pauseBtn.click();
+    } else if (key === 'm') {
+        muteBtn.click();
+    } else if (key === 'r') {
+        recordBtn.click();
+    } else if (key === 's') {
+        captureScreenshot(canvas);
+    } else if (/^[0-9]$/.test(key)) {
+        const idx = Number(key) - 1;
+        if (idx >= 0 && idx < THEME_KEYS.length) {
+            themeAutoRotate = false;
+            setTheme(THEME_KEYS[idx]);
+        }
+    }
+});
