@@ -242,3 +242,14 @@ Tips for smoother tracking:
 
 ---
 
+## Troubleshooting
+
+| Symptom | Fix |
+|---------|-----|
+| Camera permission denied | Use `https://localhost:5000` and accept the self-signed certificate warning |
+| No hands detected | Improve lighting; lower `minHandDetectionConfidence` in `main.js` from 0.5 to 0.3 |
+| Low FPS | Close background tabs; try Chrome; keep GPU acceleration enabled |
+| Fireballs never appear | Bring both palms close and rub them; check both hands are detected |
+| Audio silent | Click the mute button once - browsers require a gesture before audio starts |
+| Recording saves as `.webm` | Your browser lacks an MP4 encoder; the file plays fine, only the extension is advisory |
+
