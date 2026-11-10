@@ -49,3 +49,12 @@ export function drawNeonLine(ctx, x1, y1, x2, y2, color, core) {
         ctx.restore();
     }
 }
+export function drawHand(ctx, lm, handIdx, theme, time) {
+    const W = ctx.canvas.width;
+    const H = ctx.canvas.height;
+    const color = getNeonColor(time, handIdx, theme);
+    const core = THEMES[theme].core;
+    for (const [a, b] of CONNECTIONS) {
+        drawNeonLine(ctx, lm[a].x * W, lm[a].y * H, lm[b].x * W, lm[b].y * H, color, core);
+    }
+}
