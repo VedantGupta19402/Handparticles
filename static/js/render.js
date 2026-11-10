@@ -72,3 +72,23 @@ export function drawConstellation(ctx, hand1, hand2, theme) {
         );
     }
 }
+// The charging fireball orb rendered between two rubbing palms
+export function drawChargeOrb(ctx, x, y, r) {
+    ctx.save();
+    ctx.globalAlpha = 0.8 + Math.random() * 0.2;
+    const grad = ctx.createRadialGradient(x, y, 0, x, y, r);
+    grad.addColorStop(0, '#ffffff');
+    grad.addColorStop(0.3, '#ffaa00');
+    grad.addColorStop(1, 'rgba(255,0,0,0)');
+    ctx.fillStyle = grad;
+    ctx.beginPath();
+    ctx.arc(x, y, r, 0, Math.PI * 2);
+    ctx.fill();
+    if (Math.random() > 0.5) {
+        ctx.fillStyle = `hsl(${20 + Math.random() * 30}, 100%, 50%)`;
+        ctx.beginPath();
+        ctx.arc(x + (Math.random() - 0.5) * r, y + (Math.random() - 0.5) * r, 1.5, 0, Math.PI * 2);
+        ctx.fill();
+    }
+    ctx.restore();
+}
