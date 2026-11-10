@@ -130,3 +130,33 @@ export class Heart {
         ctx.restore();
     }
 }
+function drawHeartPath(ctx) {
+    ctx.beginPath();
+    ctx.moveTo(0, 5);
+    ctx.bezierCurveTo(-5, 0, -10, -5, -10, -10);
+    ctx.bezierCurveTo(-10, -15, -5, -20, 0, -15);
+    ctx.bezierCurveTo(5, -20, 10, -15, 10, -10);
+    ctx.bezierCurveTo(10, -5, 5, 0, 0, 5);
+}
+
+// Charge ring that fills while the finger-heart pose is held
+export function drawHeartWireframe(ctx, x, y, size, progress) {
+    ctx.save();
+    ctx.translate(x, y);
+    const s = size / 15;
+    ctx.scale(s, s);
+    ctx.lineWidth = 3 / s;
+    ctx.strokeStyle = '#ff0077';
+    ctx.shadowBlur = 15;
+    ctx.shadowColor = '#ff0077';
+    drawHeartPath(ctx);
+    const pathLength = 80;
+    ctx.setLineDash([pathLength]);
+    ctx.lineDashOffset = pathLength * (1 - progress);
+    ctx.stroke();
+    if (progress >= 1.0) {
+        ctx.fillStyle = 'rgba(255, 0, 119, 0.3)';
+        ctx.fill();
+    }
+    ctx.restore();
+}
