@@ -145,3 +145,10 @@ html, body {
     0%, 100% { text-shadow: 0 0 6px rgba(0,255,163,0.5); }
     50%      { text-shadow: 0 0 16px rgba(0,255,163,0.9); }
 }
+/* ── GESTURE ACCENTS ───────────────────────────────────────────── */
+.gesture-text { color: #00ffff; transition: color 0.2s; }
+.gesture-text.gesture-pinch { color: #ff1493 !important; text-shadow: 0 0 10px rgba(255,20,147,0.7) !important; }
+.gesture-text.gesture-peace { color: #ffd93d !important; text-shadow: 0 0 10px rgba(255,217,61,0.8) !important; }
+.gesture-text.gesture-fist  { color: #ffa500 !important; text-shadow: 0 0 10px rgba(255,165,0,0.7) !important; }
+.gesture-text.gesture-open  { color: #00ffff !important; }
+.gesture-text.gesture-fire  { color: #ff6b35 !important; text-shadow: 0 0 12px rgba(255,107,53,0.8) !important; }
