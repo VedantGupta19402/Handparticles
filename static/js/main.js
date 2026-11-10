@@ -139,3 +139,20 @@ function processFireball(hands) {
 
     return { actionText, chargeRadius, chargePos };
 }
+function updateGestureUI(hands, actionText) {
+    const gestEl = document.getElementById('gesture');
+    gestEl.className = 'stat-value gesture-text';
+
+    if (hands.length === 0) {
+        gestEl.textContent = '—';
+        return;
+    }
+    if (actionText) {
+        gestEl.textContent = actionText;
+        gestEl.classList.add('gesture-fire');
+        return;
+    }
+    const key = detectGesture(hands[0]);
+    gestEl.textContent = GESTURE_LABELS[key];
+    gestEl.classList.add(`gesture-${key}`);
+}
