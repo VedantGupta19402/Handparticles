@@ -30,3 +30,15 @@ DEFAULT_THEME = "Aurora"
 
 theme_state = {"current": DEFAULT_THEME}
 theme_lock = Lock()
+@app.route("/")
+def index():
+    """Serve the main application page."""
+    return render_template("index.html")
+
+
+@app.route("/get_theme", methods=["GET"])
+def get_theme():
+    """Return the active theme plus the list of available themes."""
+    with theme_lock:
+        theme = theme_state["current"]
+    return jsonify({"theme": theme, "available_themes": VALID_THEMES})
