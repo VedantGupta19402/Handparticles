@@ -89,3 +89,15 @@ BANNER = r"""
 def sigint_handler(sig, frame):
     print("\nShutting down HandParticles server...")
     sys.exit(0)
+if __name__ == "__main__":
+    signal.signal(signal.SIGINT, sigint_handler)
+
+    print(BANNER)
+    print(f"UI address : https://{_local_ip()}:5000")
+    print("Local URL  : https://127.0.0.1:5000")
+    print("================================================\n")
+
+    try:
+        app.run(debug=False, threaded=True, host="0.0.0.0", port=5000, ssl_context="adhoc")
+    except KeyboardInterrupt:
+        pass
