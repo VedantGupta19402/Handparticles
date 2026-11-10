@@ -166,3 +166,28 @@ handparticles/
 
 ---
 
+## API Reference
+
+| Endpoint | Method | Description |
+|----------|--------|-------------|
+| `/` | GET | Serves `index.html` |
+| `/get_theme` | GET | Returns the active theme and the list of available themes |
+| `/update_theme` | POST | Persists a theme selection (JSON body: `{"theme": "Matrix"}`) |
+| `/health` | GET | Liveness probe returning service status |
+| `/kill` | POST | Disconnects the client session and releases the camera |
+
+```bash
+# Check the active theme
+curl -k https://localhost:5000/get_theme
+
+# Switch to Matrix
+curl -k -X POST https://localhost:5000/update_theme \
+  -H "Content-Type: application/json" \
+  -d '{"theme": "Matrix"}'
+
+# Liveness
+curl -k https://localhost:5000/health
+```
+
+---
+
