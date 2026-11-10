@@ -9,3 +9,24 @@
     <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
 </head>
 <body>
+    <div class="video-container">
+        <!-- Camera permission overlay -->
+        <div id="cameraOverlay" class="camera-overlay">
+            <div class="overlay-inner">
+                <div class="logo-glow">&#128400;</div>
+                <h1>HandParticles</h1>
+                <p>Turn your webcam into a particle instrument. Track your hands, throw fireballs, spawn hearts - all processed locally in your browser with MediaPipe.</p>
+                <button id="startCameraBtn" class="primary-btn"><span>Enable Camera</span></button>
+                <p class="hint">Works on mobile &amp; desktop &middot; Nothing leaves your device</p>
+            </div>
+        </div>
+
+        <!-- Terminated overlay -->
+        <div id="terminatedOverlay" class="camera-overlay" style="display: none;">
+            <div class="overlay-inner">
+                <div class="logo-glow" style="filter: drop-shadow(0 0 20px #ff0000);">&#128721;</div>
+                <h1 style="background: linear-gradient(90deg, #ff4444, #ff0000); -webkit-background-clip: text;">Terminated</h1>
+                <p>The session has ended and the camera has been released.</p>
+                <p class="hint">Restart the server from your terminal to continue.</p>
+            </div>
+        </div>
