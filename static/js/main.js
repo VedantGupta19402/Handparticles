@@ -296,3 +296,21 @@ document.getElementById('startCameraBtn').addEventListener('click', async () => 
         btn.disabled = false;
     }
 });
+function setTheme(theme) {
+    currentTheme = theme;
+    document.querySelectorAll('.theme-btn').forEach(b => b.classList.toggle('active', b.dataset.theme === theme));
+}
+
+let themeIdx = THEME_KEYS.indexOf(currentTheme);
+setInterval(() => {
+    if (!themeAutoRotate) return;
+    themeIdx = (themeIdx + 1) % THEME_KEYS.length;
+    setTheme(THEME_KEYS[themeIdx]);
+}, 15000);
+
+document.querySelectorAll('.theme-btn').forEach(btn => {
+    btn.addEventListener('click', () => {
+        themeAutoRotate = false;
+        setTheme(btn.dataset.theme);
+    });
+});
