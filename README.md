@@ -27,3 +27,14 @@ All inference runs in-browser via WASM - no backend ML load, no video data leavi
 
 ---
 
+## Features
+
+| Feature | Details |
+|---------|---------|
+| 🖐 Hand tracking | Up to 2 hands, 21 landmarks each (MediaPipe WASM, GPU-accelerated) |
+| 👌 Gesture recognition | Pinch, peace, fist, open hand and finger heart in real time |
+| 📊 Hand spread metric | 0-100% spread from palm centre to fingertips, live in the HUD |
+| 🌈 12 neon themes | Aurora, Cyberpunk, Rainbow, Lava, Ocean, Galaxy, Matrix, Frostbite, GoldenHour, Synthwave, NeonDemon, Ultraviolet |
+| ✨ Constellation web | Lines between matching fingertips of both hands |
+| 🔥 Fireballs | Charge via palm friction, auto-throw at full size, flick to hurl |
+
