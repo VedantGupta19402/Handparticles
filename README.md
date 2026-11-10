@@ -138,3 +138,31 @@ Click any button in the right-hand rail to switch instantly, or press **1-9**. T
 
 ---
 
+## Project Structure
+
+```
+handparticles/
+├── app.py                    # Flask backend: UI, theme persistence, health, kill
+├── requirements.txt          # Python dependencies
+├── templates/
+│   └── index.html            # Web UI: overlays, stats HUD, theme rail
+├── static/
+│   ├── style.css             # Glassmorphism styling and responsive layout
+│   └── js/
+│       ├── config.js         # Themes, thresholds, recording limits
+│       ├── audio.js          # Procedural Web Audio engine
+│       ├── gestures.js       # Gesture classification
+│       ├── effects.js        # Particles, fireballs, hearts, sparkles
+│       ├── render.js         # Neon wireframe rendering
+│       ├── recorder.js       # Recording + snapshot export
+│       └── main.js           # Engine entrypoint: loop, state, controls
+├── .github/workflows/        # CI: python + docs checks
+├── CONTRIBUTING.md
+├── CODE_OF_CONDUCT.md
+├── SECURITY.md
+├── LICENSE                   # MIT
+└── README.md
+```
+
+---
+
