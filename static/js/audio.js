@@ -12,3 +12,17 @@ export class AudioEngine {
         this.osc = null;
         this.gain = null;
     }
+    init() {
+        if (this.ctx.state === 'suspended') this.ctx.resume();
+        if (!this.osc) {
+            // Ambient drone that reacts to hand spread
+            this.osc = this.ctx.createOscillator();
+            this.gain = this.ctx.createGain();
+            this.osc.type = 'sine';
+            this.osc.frequency.value = 50;
+            this.gain.gain.value = 0.05;
+            this.osc.connect(this.gain);
+            this.gain.connect(this.master);
+            this.osc.start();
+        }
+    }
